@@ -48,3 +48,31 @@ sidebarLinks.forEach(link => {
         }
     });
 });
+
+// เปิด popup เพื่อเพิมโพสต์
+const addBtn = document.querySelector(".sidebar .add");
+const modal = document.getElementById("addPostModal");
+const closeBtn = modal.querySelector(".close");
+const postBtn = document.getElementById("postBtn");
+const textarea = modal.querySelector("textarea");
+
+addBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    modal.style.display = "flex";
+});
+
+closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
+postBtn.addEventListener("click", () => {
+    alert("ข้อความ: " + textarea.value);
+    textarea.value = "";
+    modal.style.display = "none";
+});

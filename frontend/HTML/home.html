@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Header -->
     <header class="navbar">
         <div class="logo">
             <a href="/frontend/HTML/home.html">
@@ -27,6 +28,8 @@
             <span class="ball"></span>
         </label>
     </header>
+
+    <!-- Sidebar Menu -->
     <nav>
         <div class="sidebar">
             <a href="#" class="active"><i class="fa-solid fa-home"></i></a>
@@ -36,6 +39,17 @@
             <a href="#"><i class="fa-solid fa-user"></i></a>
         </div>
     </nav>
+
+    <!-- Add Post -->
+    <div id="addPostModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>เพิ่มโพสต์ใหม่</h2>
+        <textarea placeholder="เขียนข้อความ..." rows="5"></textarea>
+        <button id="postBtn">โพสต์</button>
+    </div>
+    </div>
+
     <script src="/frontend/JS/home.js"></script>
 </body>
 </html>
