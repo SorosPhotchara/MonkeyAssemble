@@ -135,8 +135,107 @@ body {
 
 html.dark .toggle .ball {
   transform: translateX(45px);
+  
 }
 
 input#toggle {
   display: none;
+}
+
+/* Sidebar*/
+.sidebar {
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  background: var(--bg);
+  padding: 20px 15px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 22px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  align-items: center;
+  transition: background 0.3s, color 0.3s, ;
+  border: 1px solid var(--highlight);
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+  background: transparent;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar a i {
+  font-size: 25px;
+  color: var(--bar-font);
+  opacity: 1;
+  transition: color 0.3s, opacity 0.3s;
+}
+
+.sidebar a.active {
+  background: var(--highlight);
+  border-color: var(--border);
+}
+
+.sidebar a.active i {
+  color: var(--border);
+  opacity: 1;
+}
+
+.sidebar a:hover {
+  background: var(--highlight);
+  border-color: var(--head-font);
+}
+
+.sidebar a:hover i {
+  color: var(--border);
+  opacity: 1;
+}
+
+.sidebar a.add {
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  transition: all 0.1s ease;
+  background: var(--highlight);
+}
+
+.sidebar a.add:hover {
+  background: var(--border);
+  color: var(--highlight);
+}
+.sidebar a.add:hover i {
+  color: inherit;
+}
+
+html.dark .sidebar a.add {
+  background: var(--highlight);
+  color: var(--bar-font);
+}
+
+html.dark .sidebar a.add i {
+  color: inherit;
+}
+
+html.dark .sidebar a.add:hover {
+  background: var(--bar-font);
+  color: var(--highlight) ;
+}
+
+html.dark .sidebar a.add:hover i {
+  color: inherit;
 }

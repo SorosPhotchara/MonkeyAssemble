@@ -5,11 +5,10 @@ const toggle = document.getElementById("toggle");
 const sunIcon = document.querySelector(".toggle .bxs-sun");
 const moonIcon = document.querySelector(".toggle .bx-moon");
 
-// h2 toggle
 menuItems.forEach(item => {
     item.addEventListener("click", () => {
-        menuItems.forEach(el => el.classList.remove("active")); // ลบ active ทั้งหมด
-        item.classList.add("active"); // ใส่ active ที่กด
+        menuItems.forEach(el => el.classList.remove("active"));
+        item.classList.add("active");
     });
 });
 
@@ -23,7 +22,29 @@ toggle.addEventListener("change", () => {
     root.classList.toggle("dark");
     localStorage.setItem("theme", root.classList.contains("dark") ? "dark" : "light");
 
-    // สลับไอคอน Sun/Moon
     sunIcon.className = sunIcon.className.includes("bxs") ? "bx bx-sun" : "bx bxs-sun";
     moonIcon.className = moonIcon.className.includes("bxs") ? "bx bx-moon" : "bx bxs-moon";
+});
+
+// set active
+const sidebarLinks = document.querySelectorAll(".sidebar a");
+
+sidebarLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        sidebarLinks.forEach(el => {
+            el.classList.remove("active");
+            const icon = el.querySelector("i");
+            if (icon.classList.contains("fas")) {
+                icon.classList.replace("fas", "far");
+            }
+        });
+
+        link.classList.add("active");
+        const activeIcon = link.querySelector("i");
+        if (activeIcon.classList.contains("far")) {
+            activeIcon.classList.replace("far", "fas");
+        }
+    });
 });
