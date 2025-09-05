@@ -1,4 +1,6 @@
-/* Light Mode */
+/* =======================
+   Light Mode Variables
+======================= */
 :root {
   --bg: #FFEDEA;
   --bar-font: #CE6A57;
@@ -13,7 +15,9 @@
   --ball-bg: #feb47b;
 }
 
-/* Dark Mode */
+/* =======================
+   Dark Mode Variables
+======================= */
 html.dark {
   --bg: #392F35;
   --bar-font: #F2E9E4;
@@ -28,6 +32,9 @@ html.dark {
   --ball-bg: #feb47b;
 }
 
+/* =======================
+   Global Styles
+======================= */
 body {
   margin: 0;
   font-family: sans-serif;
@@ -37,6 +44,9 @@ body {
   transition: 0.3s;
 }
 
+/* =======================
+   Navbar
+======================= */
 .navbar {
   position: fixed;
   top: 0;
@@ -89,7 +99,9 @@ body {
   width: 100%;
 }
 
-/* ----------------- Mode -------------------- */
+/* =======================
+   Dark/Light Mode Toggle
+======================= */
 .toggle {
   cursor: pointer;
   position: fixed;
@@ -136,14 +148,15 @@ body {
 
 html.dark .toggle .ball {
   transform: translateX(45px);
-
 }
 
 input#toggle {
   display: none;
 }
 
-/* ------------------ Sidebar ----------------- */
+/* =======================
+   Sidebar
+======================= */
 .sidebar {
   position: fixed;
   top: 50%;
@@ -153,12 +166,12 @@ input#toggle {
   padding: 20px 15px;
   border-radius: 25px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
   gap: 22px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  justify-content: center;
   align-items: center;
-  transition: background 0.2s, color 0.1s, ;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s, color 0.1s;
   border: 1px solid var(--highlight);
 }
 
@@ -202,6 +215,7 @@ input#toggle {
   opacity: 1;
 }
 
+/* Sidebar Add Button */
 .sidebar a.add {
   width: 60px;
   height: 60px;
@@ -219,17 +233,9 @@ input#toggle {
   color: var(--highlight);
 }
 
-.sidebar a.add:hover i {
-  color: inherit;
-}
-
 html.dark .sidebar a.add {
   background: var(--highlight);
   color: var(--bar-font);
-}
-
-html.dark .sidebar a.add i {
-  color: inherit;
 }
 
 html.dark .sidebar a.add:hover {
@@ -237,11 +243,9 @@ html.dark .sidebar a.add:hover {
   color: var(--highlight);
 }
 
-html.dark .sidebar a.add:hover i {
-  color: inherit;
-}
-
-/* ------------- Hambuger Bar -------------- */
+/* =======================
+   Hamburger Menu
+======================= */
 .hamburger {
   position: fixed;
   bottom: 20px;
@@ -252,6 +256,7 @@ html.dark .sidebar a.add:hover i {
   z-index: 2000;
   background: var(--bg);
   padding: 10px;
+  transition: background 0.2s, transform 0.2s;
 }
 
 .hamburger-menu {
@@ -278,24 +283,17 @@ html.dark .sidebar a.add:hover i {
   padding: 10px 16px;
   cursor: pointer;
   color: var(--head-font);
+  transition: background 0.2s;
   font-size: 15px;
-  display: flex;
-  align-items: center;
-  gap: 8px;  
-  transition: color 0.2s ease
 }
-
-.hamburger-menu li i {
-  color: inherit;
-  font-size: 18px;  
-}
-
 
 .hamburger-menu li:hover {
   background: var(--highlight);
 }
 
-/* --------------- Add Post ---------------- */
+/* =======================
+   Modal / Add Post
+======================= */
 .modal {
   display: none;
   position: fixed;
@@ -343,6 +341,7 @@ html.dark .sidebar a.add:hover i {
   color: var(--bar-font);
 }
 
+/* User Info in Modal */
 .user-info {
   display: flex;
   align-items: center;
@@ -368,6 +367,7 @@ html.dark .sidebar a.add:hover i {
   margin: 0;
 }
 
+/* Textarea */
 textarea {
   width: 100%;
   min-height: 100px;
@@ -382,6 +382,7 @@ textarea:focus {
   outline: none;
 }
 
+/* Action Bar in Modal */
 .action-bar {
   display: flex;
   justify-content: space-between; 
@@ -401,10 +402,6 @@ textarea:focus {
   color: var(--border);
 }
 
-html.dark .action-bar .icon-left i {
-  color: var(--bar-font);
-}
-
 .post-btn {
   background: var(--border);
   color: var(--bg);
@@ -422,6 +419,7 @@ html.dark .action-bar .icon-left i {
   background: var(--bar-font);
 }
 
+/* Image Preview */
 .image-preview {
   position: relative;
   margin-top: 10px;
@@ -453,4 +451,127 @@ html.dark .image-preview img {
   padding: 2px 6px;
   cursor: pointer;
   font-size: 16px;
+}
+
+/* =======================
+   Feed / Post Cards
+======================= */
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 100px auto 40px;
+  width: 90%;
+  max-width: 600px;
+}
+
+.post-card {
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  padding: 16px;
+  margin: 12px 0;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.post-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.username {
+  font-weight: 600;
+  color: var(--head-font);
+}
+
+.time {
+  font-size: 0.85rem;
+  color: var(--sub-font);
+}
+
+.more-options {
+  position: relative;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--sub-font);
+}
+
+.options-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 20px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  padding: 5px 0;
+  z-index: 10;
+}
+
+.options-menu button {
+  background: none;
+  border: none;
+  padding: 8px 14px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.options-menu button:hover {
+  background: var(--highlight);
+}
+
+.post-text {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: var(--head-font);
+}
+
+.post-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.post-img {
+  width: 100%;
+  max-width: 220px;
+  border-radius: 10px;
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  color: var(--sub-font);
+}
+
+.like-icon.liked {
+  color: red;
 }

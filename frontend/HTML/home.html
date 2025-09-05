@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monkey Assemble</title>
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/166/166749.png">
     <link rel="stylesheet" href="/frontend/CSS/home.css">
@@ -14,7 +15,7 @@
     <!-- Header -->
     <header class="navbar">
         <div class="logo">
-            <a href="/frontend/HTML/home.html">
+            <a href="/frontend/CSS/home.css">
                 <img src="/frontend/picture/logo.png" alt="Monkey Assemble Logo">
             </a>
         </div>
@@ -35,11 +36,11 @@
     <!-- Sidebar Menu -->
     <nav>
         <div class="sidebar">
-            <a href="#" class="active"><i class="fa-solid fa-home"></i></a>
-            <a href="#"><i class="fa-solid fa-tag"></i></a>
+            <a href="/frontend/HTML/home.html" class="active"><i class="fa-solid fa-home"></i></a>
+            <a href="/frontend/HTML/tags.html"><i class="fa-solid fa-tag"></i></a>
             <a href="#" class="add"><i class="fa-solid fa-plus"></i></a>
-            <a href="#"><i class="fa-solid fa-heart"></i></a>
-            <a href="#"><i class="fa-solid fa-user"></i></a>
+            <a href="/frontend/HTML/notify.html"><i class="fa-solid fa-heart"></i></a>
+            <a href="/frontend/HTML/profile.html"><i class="fa-solid fa-user"></i></a>
         </div>
     </nav>
 
@@ -58,7 +59,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h3>เธรดใหม่</h3>
+                <h3>โพสต์ใหม่</h3>
             </div>
 
             <!-- User Info -->
@@ -70,6 +71,7 @@
             </div>
 
             <textarea placeholder="มีอะไรมาเล่าให้กันฟังไหม"></textarea>
+
             <div class="image-preview" style="display:none;">
                 <img id="previewImg" alt="Preview">
                 <span class="remove-img">&times;</span>
@@ -87,7 +89,9 @@
         </div>
     </div>
 
+    <!-- Feed Container -->
+    <main class="feed" id="feed"></main>
+    
     <script src="/frontend/JS/home.js"></script>
 </body>
-
 </html>
