@@ -39,7 +39,7 @@
             <a href="/frontend/HTML/home.html" class="active"><i class="fa-solid fa-home"></i></a>
             <a href="/frontend/HTML/tags.html"><i class="fa-solid fa-tag"></i></a>
             <a href="#" class="add"><i class="fa-solid fa-plus"></i></a>
-            <a href="/frontend/HTML/notify.html"><i class="fa-solid fa-heart"></i></a>
+            <a href="/frontend/HTML/notify.html"><i class="fa-solid fa-bell"></i></a>
             <a href="/frontend/HTML/profile.html"><i class="fa-solid fa-user"></i></a>
         </div>
     </nav>
@@ -53,44 +53,6 @@
         <ul id="menuList">
         </ul>
     </div>
-
-    <!-- Add Post Modal -->
-    <div id="addPostModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close">&times;</span>
-                <h3>โพสต์ใหม่</h3>
-            </div>
-
-            <!-- User Info -->
-            <div class="user-info">
-                <img src="/frontend/picture/logo.png" alt="Profile" class="profile-pic">
-                <div class="user-details">
-                    <p class="username">@username</p>
-                </div>
-            </div>
-
-            <textarea placeholder="มีอะไรมาเล่าให้กันฟังไหม"></textarea>
-
-            <div class="image-preview" style="display:none;">
-                <img id="previewImg" alt="Preview">
-                <span class="remove-img">&times;</span>
-            </div>
-
-            <!-- Action Bar -->
-            <div class="action-bar">
-                <label for="imageInput" class="icon-left">
-                    <i class="fa-regular fa-image"></i>
-                </label>
-                <input type="file" id="imageInput" accept="image/*" multiple style="display:none">
-
-                <button class="post-btn" disabled>โพสต์</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Feed Container -->
-    <main class="feed" id="feed"></main>
     
     <script src="/frontend/JS/home.js"></script>
 </body>
