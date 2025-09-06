@@ -42,16 +42,22 @@ sidebarLinks.forEach((link, index) => {
 });
 
 // ---------------- Hamburger & Menu ----------------
-let isLoggedIn = false;
+let isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; 
 const hamburgerBtn = document.getElementById("hamburgerBtn");
 const hamburgerMenu = document.getElementById("hamburgerMenu");
 const menuList = document.getElementById("menuList");
 
 function addMenuItem(text, onClick) {
-  const li = document.createElement("li");
-  li.textContent = text;
-  li.addEventListener("click", onClick);
-  menuList.appendChild(li);
+    const li = document.createElement("li");
+    li.textContent = text;
+    li.addEventListener("click", onClick);
+    menuList.appendChild(li);
+}
+
+function setLoginState(state) {
+    isLoggedIn = state;
+    localStorage.setItem("isLoggedIn", state);
+    updateMenu();
 }
 
 function updateMenu() {
@@ -69,111 +75,100 @@ function updateMenu() {
             window.location.href = "/frontend/HTML/profile.html";
         });
 
-        addMenuItem("ออกจากระบบ", () => {
-            fetch("/Account/Logout", { method: "POST" }).then(() => {
-                isLoggedIn = false;
-                updateMenu();
+        addMenuItem("ออกจากระบบ", async () => {
+            try {
+                await fetch("/Account/Logout", { method: "POST" });
+                setLoginState(false);
                 alert("ออกจากระบบเรียบร้อย");
-            });
+            } catch (err) {
+                alert("เกิดข้อผิดพลาด: " + err.message);
+            }
         });
     }
 }
 
 function toggleMenu(open) {
-  hamburgerMenu.style.display = open ? "block" : "none";
-  hamburgerBtn.querySelector("i").className = open ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+    hamburgerMenu.style.display = open ? "block" : "none";
+    hamburgerBtn.querySelector("i").className = open ? "fa-solid fa-xmark" : "fa-solid fa-bars";
 }
 
 let menuOpen = false;
 hamburgerBtn.addEventListener("click", () => {
-  menuOpen = !menuOpen;
-  toggleMenu(menuOpen);
+    menuOpen = !menuOpen;
+    toggleMenu(menuOpen);
 });
 
 window.addEventListener("click", (e) => {
-  if (menuOpen && !hamburgerBtn.contains(e.target) && !hamburgerMenu.contains(e.target)) {
-    toggleMenu(false);
-    menuOpen = false;
-  }
+    if (menuOpen && !hamburgerBtn.contains(e.target) && !hamburgerMenu.contains(e.target)) {
+        toggleMenu(false);
+        menuOpen = false;
+    }
 });
 
 updateMenu();
 
 // ---------------- Login / Signup / Logout ----------------
-async function showLoginModal() {
-    const username = prompt("Username:");
-    const password = prompt("Password:");
-    if(!username || !password) return;
-
-    const resp = await fetch("/Account/Login", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({username, password})
-    });
-
-    const data = await resp.json();
-    if(data.success) {
-        isLoggedIn = true;
-        updateMenu();
-        alert("Login สำเร็จ");
-        loadPosts();
-    } else {
-        alert("Login ล้มเหลว: " + data.message);
-    }
+function showLoginPage() {
+    window.location.href = "/frontend/HTML/login.html";
 }
 
-async function showSignupModal() {
-    const username = prompt("Username:");
-    const password = prompt("Password:");
-    if(!username || !password) return;
-
-    const resp = await fetch("/Account/Register", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({username, password})
-    });
-
-    const data = await resp.json();
-    if(data.success) {
-        alert("สมัครสมาชิกสำเร็จ กรุณาเข้าสู่ระบบ");
-    } else {
-        alert("สมัครสมาชิกล้มเหลว: " + data.message);
-    }
+function showSignupPage() {
+    window.location.href = "/frontend/HTML/register.html";
 }
 
 async function logoutUser() {
-    await fetch("/Account/Logout", { method: "POST" });
-    isLoggedIn = false;
-    updateMenu();
-    alert("ออกจากระบบเรียบร้อย");
+    try {
+        await fetch("/Account/Logout", { method: "POST" });
+        isLoggedIn = false;
+        localStorage.setItem("isLoggedIn", "false");
+        updateMenu();
+        alert("ออกจากระบบเรียบร้อย");
+    } catch (err) {
+        alert("เกิดข้อผิดพลาด: " + err.message);
+    }
 }
 
 // ---------------- Feed / Posts ----------------
 const feedContainer = document.getElementById("feed");
 
 async function loadPosts() {
-    if(!isLoggedIn) return;
-    const resp = await fetch("/Post/GetPosts");
-    const posts = await resp.json();
-    feedContainer.innerHTML = "";
-    posts.forEach(post => addPostToFeed(post));
+    if (!isLoggedIn) return;
+    try {
+        const resp = await fetch("/Post/GetPosts");
+        if (!resp.ok) throw new Error("โหลดโพสต์ล้มเหลว");
+        const posts = await resp.json();
+        feedContainer.innerHTML = "";
+        posts.forEach(post => addPostToFeed(post));
+    } catch (err) {
+        alert(err.message);
+    }
 }
 
-async function createPost(text, images=[]) {
-    const formData = new FormData();
-    formData.append("text", text);
-    images.forEach((file, i) => formData.append("images", file));
+async function createPost(text, images = []) {
+    try {
+        const formData = new FormData();
+        formData.append("text", text);
+        images.forEach((file, i) => formData.append("images", file));
 
-    const resp = await fetch("/Post/AddPost", {method:"POST", body:formData});
-    const newPost = await resp.json();
-    addPostToFeed(newPost, true);
+        const resp = await fetch("/Post/AddPost", { method: "POST", body: formData });
+        if (!resp.ok) throw new Error("เพิ่มโพสต์ล้มเหลว");
+        const newPost = await resp.json();
+        addPostToFeed(newPost, true);
+    } catch (err) {
+        alert(err.message);
+    }
 }
 
 async function deletePost(postId, card) {
-    if(!confirm("คุณแน่ใจว่าต้องการลบโพสต์นี้?")) return;
-    const resp = await fetch(`/Post/DeletePost/${postId}`, {method:"DELETE"});
-    const data = await resp.json();
-    if(data.success) card.remove();
+    if (!confirm("คุณแน่ใจว่าต้องการลบโพสต์นี้?")) return;
+    try {
+        const resp = await fetch(`/Post/DeletePost/${postId}`, { method: "DELETE" });
+        if (!resp.ok) throw new Error("ลบโพสต์ล้มเหลว");
+        const data = await resp.json();
+        if (data.success) card.remove();
+    } catch (err) {
+        alert(err.message);
+    }
 }
 
 // ---------------- Add Post Modal ----------------
@@ -185,34 +180,91 @@ const textarea = modal.querySelector("textarea");
 const imageInput = document.getElementById("imageInput");
 const previewContainer = document.querySelector(".image-preview");
 
-addBtn.addEventListener("click", () => { modal.style.display="flex"; textarea.focus(); });
-closeBtn.addEventListener("click", () => { modal.style.display="none"; clearPostFields(); });
-window.addEventListener("click", (e) => { if(e.target===modal){ modal.style.display="none"; clearPostFields(); } });
+addBtn.addEventListener("click", () => { modal.style.display = "flex"; textarea.focus(); });
+closeBtn.addEventListener("click", () => { modal.style.display = "none"; clearPostFields(); });
+window.addEventListener("click", (e) => { if (e.target === modal) { modal.style.display = "none"; clearPostFields(); } });
 
-function clearPostFields() { textarea.value=""; imageInput.value=""; previewContainer.innerHTML=""; previewContainer.style.display="none"; postBtn.disabled=true; }
+function clearPostFields() {
+    textarea.value = "";
+    imageInput.value = "";
+    previewContainer.innerHTML = "";
+    previewContainer.style.display = "none";
+    postBtn.disabled = true;
+}
 
 imageInput.addEventListener("change", updatePostBtn);
 textarea.addEventListener("input", updatePostBtn);
 
 function updatePostBtn() {
-    postBtn.disabled = !textarea.value.trim() && imageInput.files.length===0;
+    postBtn.disabled = !textarea.value.trim() && imageInput.files.length === 0;
 }
 
 postBtn.addEventListener("click", async () => {
     const text = textarea.value.trim();
-    if(!text && imageInput.files.length===0) return;
+    if (!text && imageInput.files.length === 0) return;
     await createPost(text, Array.from(imageInput.files));
     clearPostFields();
-    modal.style.display="none";
+    modal.style.display = "none";
+});
+
+// ---------------- Image Preview ----------------
+imageInput.addEventListener("change", () => {
+    previewContainer.innerHTML = ""; 
+    Array.from(imageInput.files).forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const wrapper = document.createElement("div");
+            wrapper.classList.add("preview-wrapper");
+
+            const img = document.createElement("img");
+            img.src = e.target.result;
+
+            const delBtn = document.createElement("div");
+            delBtn.classList.add("remove-img");
+            delBtn.innerText = "×";
+            delBtn.addEventListener("click", () => {
+                const dt = new DataTransfer();
+                Array.from(imageInput.files).forEach((f, i) => {
+                    if (i !== index) dt.items.add(f);
+                });
+                imageInput.files = dt.files;
+
+                wrapper.remove();
+                updatePostBtn();
+            });
+
+            wrapper.appendChild(img);
+            wrapper.appendChild(delBtn);
+            previewContainer.appendChild(wrapper);
+            previewContainer.style.display = "flex";
+        };
+        reader.readAsDataURL(file);
+    });
+    updatePostBtn();
+});
+
+function updatePostBtn() {
+    postBtn.disabled = !textarea.value.trim() && imageInput.files.length === 0;
+}
+
+postBtn.addEventListener("click", async () => {
+    const text = textarea.value.trim();
+    if (!text && imageInput.files.length === 0) return;
+
+    const files = Array.from(imageInput.files);
+    await createPost(text, files);
+
+    clearPostFields();
+    modal.style.display = "none";
 });
 
 // ---------------- Add Post Card ----------------
-function addPostToFeed(post, prepend=false) {
+function addPostToFeed(post, prepend = false) {
     const card = document.createElement("div");
     card.classList.add("post-card");
     let imagesHTML = "";
-    if(post.images?.length) {
-        imagesHTML = `<div class="post-images">${post.images.map(img=>`<img src="${img}" class="post-img">`).join("")}</div>`;
+    if (post.images?.length) {
+        imagesHTML = `<div class="post-images">${post.images.map(img => `<img src="${img}" class="post-img">`).join("")}</div>`;
     }
 
     card.innerHTML = `
@@ -242,9 +294,78 @@ function addPostToFeed(post, prepend=false) {
         </div>
     `;
 
+    const moreBtn = card.querySelector(".more-options i");
+    const optionsMenu = card.querySelector(".options-menu");
+    moreBtn.addEventListener("click", () => {
+        optionsMenu.classList.toggle("show");
+    });
+
     const deleteBtn = card.querySelector(".delete-post");
     deleteBtn.addEventListener("click", () => deletePost(post.id, card));
 
-    if(prepend) feedContainer.prepend(card);
+    const likeIcon = card.querySelector(".like-icon");
+    const likeCount = card.querySelector(".like-count");
+    likeIcon.addEventListener("click", async () => {
+        try {
+            const resp = await fetch(`/Post/Like/${post.id}`, { method: "POST" });
+            if (!resp.ok) throw new Error("กดถูกใจล้มเหลว");
+            const data = await resp.json();
+            if (data.success) {
+                likeIcon.classList.toggle("fa-solid");
+                likeIcon.classList.toggle("fa-regular");
+                likeCount.textContent = data.newLikeCount;
+            }
+        } catch (err) {
+            alert(err.message);
+        }
+    });
+
+    if (prepend) feedContainer.prepend(card);
     else feedContainer.appendChild(card);
 }
+
+const commentModal = document.getElementById("commentModal");
+const commentClose = commentModal.querySelector(".close");
+const commentTextarea = commentModal.querySelector("textarea");
+const commentBtn = commentModal.querySelector(".comment-btn");
+let currentPostId = null;
+
+function openCommentModal(postId) {
+    currentPostId = postId;
+    commentTextarea.value = "";
+    commentModal.style.display = "flex";
+    commentTextarea.focus();
+}
+
+commentClose.addEventListener("click", () => {
+    commentModal.style.display = "none";
+});
+window.addEventListener("click", (e) => {
+    if (e.target === commentModal) {
+        commentModal.style.display = "none";
+    }
+});
+
+commentBtn.addEventListener("click", async () => {
+    const text = commentTextarea.value.trim();
+    if (!text) return;
+    try {
+        const resp = await fetch(`/Post/Comment/${currentPostId}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text })
+        });
+        if (!resp.ok) throw new Error("ส่งคอมเมนต์ล้มเหลว");
+        const data = await resp.json();
+        if (data.success) {
+            const card = document.querySelector(`.post-card[data-id="${currentPostId}"]`);
+            if (card) {
+                const countEl = card.querySelector(".comment-count");
+                countEl.textContent = data.newCommentCount;
+            }
+            commentModal.style.display = "none";
+        }
+    } catch (err) {
+        alert(err.message);
+    }
+});

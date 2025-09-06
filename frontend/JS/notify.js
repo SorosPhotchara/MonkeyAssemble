@@ -42,16 +42,22 @@ sidebarLinks.forEach((link, index) => {
 });
 
 // ---------------- Hamburger & Menu ----------------
-let isLoggedIn = false;
+let isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; 
 const hamburgerBtn = document.getElementById("hamburgerBtn");
 const hamburgerMenu = document.getElementById("hamburgerMenu");
 const menuList = document.getElementById("menuList");
 
 function addMenuItem(text, onClick) {
-  const li = document.createElement("li");
-  li.textContent = text;
-  li.addEventListener("click", onClick);
-  menuList.appendChild(li);
+    const li = document.createElement("li");
+    li.textContent = text;
+    li.addEventListener("click", onClick);
+    menuList.appendChild(li);
+}
+
+function setLoginState(state) {
+    isLoggedIn = state;
+    localStorage.setItem("isLoggedIn", state);
+    updateMenu();
 }
 
 function updateMenu() {
@@ -69,83 +75,58 @@ function updateMenu() {
             window.location.href = "/frontend/HTML/profile.html";
         });
 
-        addMenuItem("ออกจากระบบ", () => {
-            fetch("/Account/Logout", { method: "POST" }).then(() => {
-                isLoggedIn = false;
-                updateMenu();
+        addMenuItem("ออกจากระบบ", async () => {
+            try {
+                await fetch("/Account/Logout", { method: "POST" });
+                setLoginState(false);
                 alert("ออกจากระบบเรียบร้อย");
-            });
+            } catch (err) {
+                alert("เกิดข้อผิดพลาด: " + err.message);
+            }
         });
     }
 }
 
 function toggleMenu(open) {
-  hamburgerMenu.style.display = open ? "block" : "none";
-  hamburgerBtn.querySelector("i").className = open ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+    hamburgerMenu.style.display = open ? "block" : "none";
+    hamburgerBtn.querySelector("i").className = open ? "fa-solid fa-xmark" : "fa-solid fa-bars";
 }
 
 let menuOpen = false;
 hamburgerBtn.addEventListener("click", () => {
-  menuOpen = !menuOpen;
-  toggleMenu(menuOpen);
+    menuOpen = !menuOpen;
+    toggleMenu(menuOpen);
 });
 
 window.addEventListener("click", (e) => {
-  if (menuOpen && !hamburgerBtn.contains(e.target) && !hamburgerMenu.contains(e.target)) {
-    toggleMenu(false);
-    menuOpen = false;
-  }
+    if (menuOpen && !hamburgerBtn.contains(e.target) && !hamburgerMenu.contains(e.target)) {
+        toggleMenu(false);
+        menuOpen = false;
+    }
 });
 
 updateMenu();
 
+
 // ---------------- Login / Signup / Logout ----------------
-async function showLoginModal() {
-    const username = prompt("Username:");
-    const password = prompt("Password:");
-    if(!username || !password) return;
-
-    const resp = await fetch("/Account/Login", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({username, password})
-    });
-
-    const data = await resp.json();
-    if(data.success) {
-        isLoggedIn = true;
-        updateMenu();
-        alert("Login สำเร็จ");
-        loadPosts();
-    } else {
-        alert("Login ล้มเหลว: " + data.message);
-    }
+function showLoginPage() {
+    window.location.href = "/frontend/HTML/login.html";
 }
 
-async function showSignupModal() {
-    const username = prompt("Username:");
-    const password = prompt("Password:");
-    if(!username || !password) return;
-
-    const resp = await fetch("/Account/Register", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({username, password})
-    });
-
-    const data = await resp.json();
-    if(data.success) {
-        alert("สมัครสมาชิกสำเร็จ กรุณาเข้าสู่ระบบ");
-    } else {
-        alert("สมัครสมาชิกล้มเหลว: " + data.message);
-    }
+function showSignupPage() {
+    window.location.href = "/frontend/HTML/register.html";
 }
 
 async function logoutUser() {
-    await fetch("/Account/Logout", { method: "POST" });
-    isLoggedIn = false;
-    updateMenu();
-    alert("ออกจากระบบเรียบร้อย");
+    try {
+        await fetch("/Account/Logout", { method: "POST" });
+        isLoggedIn = false;
+        localStorage.setItem("isLoggedIn", "false");
+        updateMenu();
+        alert("ออกจากระบบเรียบร้อย");
+    } catch (err) {
+        alert("เกิดข้อผิดพลาด: " + err.message);
+    }
 }
 
 // ---------------- Add Post Modal ----------------
@@ -157,25 +138,31 @@ const textarea = modal.querySelector("textarea");
 const imageInput = document.getElementById("imageInput");
 const previewContainer = document.querySelector(".image-preview");
 
-addBtn.addEventListener("click", () => { modal.style.display="flex"; textarea.focus(); });
-closeBtn.addEventListener("click", () => { modal.style.display="none"; clearPostFields(); });
-window.addEventListener("click", (e) => { if(e.target===modal){ modal.style.display="none"; clearPostFields(); } });
+addBtn.addEventListener("click", () => { modal.style.display = "flex"; textarea.focus(); });
+closeBtn.addEventListener("click", () => { modal.style.display = "none"; clearPostFields(); });
+window.addEventListener("click", (e) => { if (e.target === modal) { modal.style.display = "none"; clearPostFields(); } });
 
-function clearPostFields() { textarea.value=""; imageInput.value=""; previewContainer.innerHTML=""; previewContainer.style.display="none"; postBtn.disabled=true; }
+function clearPostFields() {
+    textarea.value = "";
+    imageInput.value = "";
+    previewContainer.innerHTML = "";
+    previewContainer.style.display = "none";
+    postBtn.disabled = true;
+}
 
 imageInput.addEventListener("change", updatePostBtn);
 textarea.addEventListener("input", updatePostBtn);
 
 function updatePostBtn() {
-    postBtn.disabled = !textarea.value.trim() && imageInput.files.length===0;
+    postBtn.disabled = !textarea.value.trim() && imageInput.files.length === 0;
 }
 
 postBtn.addEventListener("click", async () => {
     const text = textarea.value.trim();
-    if(!text && imageInput.files.length===0) return;
+    if (!text && imageInput.files.length === 0) return;
     await createPost(text, Array.from(imageInput.files));
     clearPostFields();
-    modal.style.display="none";
+    modal.style.display = "none";
 });
 
 // ---------------- Image Preview ----------------
