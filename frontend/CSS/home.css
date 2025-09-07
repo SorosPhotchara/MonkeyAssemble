@@ -13,6 +13,8 @@
   --sun-color: #fafafa;
   --moon-color: #feb47b;
   --ball-bg: #feb47b;
+  --btn-hover: #ff4d2e;
+  --font-white: #fff;
 }
 
 /* =======================
@@ -30,6 +32,10 @@ html.dark {
   --sun-color: #feb47b;
   --moon-color: #2a2024;
   --ball-bg: #feb47b;
+  --bg-btn2: #ff7e5f;
+  --font-white: #fff;
+  --bg2: #2b242a;
+  --bg3: #3a3238;
 }
 
 /* =======================
@@ -297,4 +303,165 @@ html.dark .sidebar a.add:hover i {
 
 .hamburger-menu li:hover {
   background: var(--highlight);
+}
+
+/* =======================
+   Modal Popup
+======================= */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+}
+
+.modal-content {
+  background: var(--bg);
+  padding: 30px 40px;
+  border-radius: 30px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+  color: var(--head-font);
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-content input,
+.modal-content textarea {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  background: var(--highlight);
+  font-size: 14px;
+  outline: none;
+}
+
+.modal-content textarea {
+  resize: none;
+  height: 80px;
+}
+
+.modal-content .note {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--sub-font);
+  margin: 10px 0 5px;
+  text-align: center;
+}
+
+.create-btn {
+  padding: 10px;
+  border: none;
+  border-radius: 15px;
+  background: var(--border);
+  color: var(--font-white);
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.create-btn:hover {
+  background: var(--btn-hover);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 22px;
+  color: var(--head-font);
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.close-btn:hover {
+  color: var(--border);
+  transform: scale(1.2);
+}
+
+
+/* =======================
+   Tag Suggestions
+======================= */
+.tag-container {
+  position: relative;
+  width: 100%;
+}
+
+.tag-container input {
+  width: 93%;
+  background: var(--highlight);
+  border-radius: 10px;
+}
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: var(--highlight);
+  border-radius: 10px;
+  margin-top: 5px;
+  overflow-y: auto;
+  max-height: 150px;
+  display: none;
+  z-index: 5000;
+  scrollbar-width: none;
+}
+
+.suggestions::-webkit-scrollbar {
+  display: none;
+}
+
+.suggestions div {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-radius: 8px;
+}
+
+.suggestions div:hover {
+  background: var(--border);
+  color: var(--font-white);
+}
+
+html.dark .modal-content {
+  background: var(--bg2);
+  color: var(--head-font);
+}
+
+html.dark .modal-content input,
+html.dark .modal-content textarea {
+  background: var(--bg3);
+  color: var(--head-font);
+  border: 1px solid #555;
+}
+
+html.dark .modal-content input::placeholder,
+html.dark .modal-content textarea::placeholder {
+  color: #aaa;
+}
+
+html.dark .create-btn {
+  background: var(--bg-btn2); 
+  color: var(--font-white);
+  font-weight: bold;
+  transition: 0.2s ease-in-out;
+}
+
+html.dark .create-btn:hover {
+  background: var(--btn-hover); 
 }

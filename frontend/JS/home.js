@@ -31,15 +31,17 @@ sidebarLinks.forEach((link, index) => {
         sidebarLinks.forEach(el => el.classList.remove("active"));
         link.classList.add("active");
 
-        switch(index) {
-            case 0: window.location.href = "/frontend/HTML/home.html"; break;
-            case 1: window.location.href = "/frontend/HTML/tags.html"; break;
-            case 2: modal.style.display="flex"; textarea.focus(); break;
-            case 3: window.location.href = "/frontend/HTML/notify.html"; break;
-            case 4: window.location.href = "/frontend/HTML/profile.html"; break; 
-        }
+            switch(index) {
+                case 0: window.location.href = "/frontend/HTML/home.html"; break;
+                case 1: window.location.href = "/frontend/HTML/tags.html"; break;
+                case 2: modal.style.display="flex"; textarea.focus(); break;
+                case 3: window.location.href = "/frontend/HTML/notify.html"; break;
+                case 4: window.location.href = "/frontend/HTML/profile.html"; break; 
+            }
     });
 });
+
+
 
 // ---------------- Hamburger & Menu ----------------
 let isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; 
@@ -127,3 +129,68 @@ async function logoutUser() {
         alert("เกิดข้อผิดพลาด: " + err.message);
     }
 }
+
+// ---------------- Modal Create Event ----------------
+const modal = document.getElementById("createEventModal");
+const createForm = document.getElementById("createEventForm");
+const addBtn = document.querySelector(".sidebar a.add");
+const closeBtn = document.querySelector(".close-btn");
+
+addBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  modal.style.display = "flex";
+});
+
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
+createForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  alert("Event Created!");
+  modal.style.display = "none";
+  createForm.reset();
+});
+
+// ---------------- Tag Suggestions ----------------
+const tagInput = document.getElementById("tagInput");
+const suggestionBox = document.getElementById("tagSuggestions");
+
+const tags = ["football", "basketball", "volleyball", "baseball", "handball", "softball"];
+
+tagInput.addEventListener("input", () => {
+  const input = tagInput.value.toLowerCase();
+  suggestionBox.innerHTML = "";
+
+  if (input) {
+    const filtered = tags.filter(tag => tag.toLowerCase().includes(input));
+    if (filtered.length > 0) {
+      suggestionBox.style.display = "block";
+      filtered.forEach(tag => {
+        const div = document.createElement("div");
+        div.textContent = tag;
+        div.addEventListener("click", () => {
+          tagInput.value = tag;
+          suggestionBox.style.display = "none";
+        });
+        suggestionBox.appendChild(div);
+      });
+    } else {
+      suggestionBox.style.display = "none";
+    }
+  } else {
+    suggestionBox.style.display = "none";
+  }
+});
+
+window.addEventListener("click", (e) => {
+  if (!suggestionBox.contains(e.target) && e.target !== tagInput) {
+    suggestionBox.style.display = "none";
+  }
+});
