@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
 /* =======================
    Light Mode Variables
 ======================= */
@@ -16,8 +19,7 @@
   --sun-color: #fafafa;
   --moon-color: #feb47b;
   --ball-bg: #feb47b;
-  --btn-hover: #ff4d2e;
-  --font-white: #fff;
+  --white: #fff;
 }
 
 /* =======================
@@ -35,21 +37,20 @@ html.dark {
   --sun-color: #feb47b;
   --moon-color: #2a2024;
   --ball-bg: #feb47b;
-  --bg-btn2: #ff7e5f;
-  --font-white: #fff;
-  --bg2: #2b242a;
-  --bg3: #3a3238;
+  --white: #fff;
 }
 
 /* =======================
    Global Styles
 ======================= */
 body {
-  margin: 0;
-  font-family: sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: var(--bg);
   color: var(--head-font);
   display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   transition: 0.3s;
 }
 
@@ -519,12 +520,12 @@ html.dark .create-btn:hover {
 
 .status.open {
   background: #4caf50;
-  color: #fff;
+  color: var(--white);
 }
 
 .status.close {
   background: #f44336;
-  color: #fff;
+  color: var(--white);;
 }
 
 .join-btn {

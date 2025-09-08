@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* =======================
@@ -40,14 +42,15 @@ html.dark {
    Global Styles
 ======================= */
 body {
-  margin: 0;
-  font-family: sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: var(--bg);
   color: var(--head-font);
   display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   transition: 0.3s;
 }
-
 /* =======================
    Navbar
 ======================= */
