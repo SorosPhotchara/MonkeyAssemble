@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -44,7 +47,7 @@ html.dark {
    Global Styles
 ======================= */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Nunito', 'Prompt', sans-serif;
   background: var(--bg);
   color: var(--head-font);
   display: flex;
@@ -168,7 +171,7 @@ input#toggle {
    Login Card
 ======================= */
 .login-card {
-  background: var(--highlight);
+  background: var(--highlight); 
   padding: 40px 30px;
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -180,21 +183,18 @@ input#toggle {
 
 .login-card h2 {
   margin-bottom: 30px;
-  font-size: 26px;
+  font-size: 36px;
   font-weight: 700;
+  font-style: italic;
   color: var(--head-font);
   text-align: center;
 }
 
-/* =======================
-   Input Fields
-======================= */
 .input-group {
   position: relative;
   margin-bottom: 15px;
   width: 100%;
   background: var(--highlight);
-  
 }
 
 .input-group input {
@@ -204,7 +204,7 @@ input#toggle {
   border-bottom: 2px solid var(--sub-font);
   background: transparent;
   font-size: 16px;
-  color: #333;
+  color: var(--head-font);
   outline: none;
   transition: 0.3s;
 }
@@ -238,8 +238,17 @@ input#toggle {
     color: var(--border);
 }
 
-.input-group input:focus + label,
-.input-group input:valid + label {
+@keyframes floatLabel { 
+  0%, 100% { 
+    transform: translateY(0); 
+  } 
+  50% { 
+    transform: translateY(-4px); 
+  } 
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label {
   top: -8px;
   left: 0;
   font-size: 13px;
@@ -247,7 +256,7 @@ input#toggle {
   background: var(--highlight); 
   padding: 0 4px;
   border-radius: 4px;
-  animation: none;
+  animation: floatLabel 2s ease-in-out infinite
 }
 
 .forget-container {
@@ -258,43 +267,46 @@ input#toggle {
 
 .forget-link {
   font-size: 16px;
+  font-style: italic;
   color: var(--border);
   text-decoration: none;
   transition: 0.2s;
 }
 
-
 .forget-link:hover {
   text-decoration: underline;
 }
-/* =======================
-   Button
-======================= */
+
 .login-btn {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--head-font);
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 25px;
   width: 100%;
   padding: 14px;
   margin-top: 10px;
-  border: 2px solid var(--border);
-  border-radius: 25px;
-  background: var(--bg);
-  color: var(--head-font);
-  font-size: 16px;
-  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .login-btn:hover {
-  background: var(--border);
   color: var(--white);
+  background: var(--border);
+}
+
+html.dark .login-btn:hover {
+  color: var(--highlight);
+  background: var(--border);
 }
 
 .login-card a {
-  display: inline-block;
-  margin-top: 12px;
   font-size: 14px;
   text-decoration: none;
-  color: #ff7e5f;
+  color: var(--border);
+  display: inline-block;
+  margin-top: 12px;
   transition: 0.2s;
 }
 
@@ -303,8 +315,21 @@ input#toggle {
 }
 
 .login-card p {
-  margin-top: 20px;
   font-size: 16px;
+  font-style: italic;
   color: var(--sub-font);
   text-align: center;
+  margin-top: 20px;
+}
+
+.login-card p .sign-up {
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--border);
+  transition: 0.2s;
+}
+
+.login-card p .sign-up:hover {
+  text-decoration: underline;
 }

@@ -157,7 +157,6 @@ createForm.addEventListener("submit", async (e) => {
   };
 
   try {
-    // 🔄 รอ backend จริง
     await fetch("http://localhost:3000/events", { // รอ backend 
       method: "POST", // รอ backend 
       headers: { "Content-Type": "application/json" }, // รอ backend 
@@ -240,7 +239,7 @@ function renderEvents(events) {
       </div>
       <h3>${event.eventName}</h3>
       <p>${event.description}</p>
-      <small>📍 ${event.location || "ไม่ระบุ"}</small><br>
+      <small>${event.location || "ไม่ระบุ"}</small><br>
       <small>รับ ${event.participants?.length || 0}/${event.maxParticipants || 0} คน</small>
       <button class="join-btn" ${event.status === "close" ? "disabled" : ""}>
         ${event.status === "close" ? "CLOSED" : "JOIN"}
