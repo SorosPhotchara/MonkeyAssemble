@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 /* =======================
    Light Mode Variables
 ======================= */
@@ -402,7 +405,7 @@ html.dark .sidebar a.add:hover i {
 }
 
 .tag-container input {
-  width: 93%;
+  width: 100%;
   background: var(--highlight);
   border-radius: 10px;
 }
@@ -464,4 +467,93 @@ html.dark .create-btn {
 
 html.dark .create-btn:hover {
   background: var(--btn-hover); 
+}
+
+/* =======================
+   Event Feed Container
+======================= */
+#event-feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 90px; /* เผื่อ navbar */
+  gap: 20px; /* เว้นระหว่างการ์ด */
+}
+
+/* =======================
+   Event Card
+======================= */
+.event-card {
+  background: var(--highlight);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s, background 0.3s;
+}
+
+.event-card:hover {
+  transform: translateY(-3px);
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.event-header .host {
+  font-weight: bold;
+  color: var(--head-font);
+}
+
+.event-header .status {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.status.open {
+  background: #4caf50;
+  color: #fff;
+}
+
+.status.close {
+  background: #f44336;
+  color: #fff;
+}
+
+.join-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 12px;
+  background: var(--border);
+  color: var(--font-white);
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.join-btn:hover {
+  background: var(--btn-hover);
+}
+
+.join-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+html.dark .event-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--head-font);
+}
+
+html.dark .applicants {
+  color: var(--sub-font);
 }

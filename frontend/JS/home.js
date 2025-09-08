@@ -24,6 +24,16 @@ menuItems.forEach(item => {
     });
 });
 
+const modal = document.getElementById("createEventModal");
+const createForm = document.getElementById("createEventForm");
+const textarea = createForm.querySelector("textarea");
+const closeBtn = modal.querySelector(".close-btn");
+
+closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+    createForm.reset();
+});
+
 const sidebarLinks = document.querySelectorAll(".sidebar a");
 sidebarLinks.forEach((link, index) => {
     link.addEventListener("click", (e) => {
@@ -40,8 +50,6 @@ sidebarLinks.forEach((link, index) => {
             }
     });
 });
-
-
 
 // ---------------- Hamburger & Menu ----------------
 let isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; 
@@ -131,29 +139,39 @@ async function logoutUser() {
 }
 
 // ---------------- Modal Create Event ----------------
-const modal = document.getElementById("createEventModal");
-const createForm = document.getElementById("createEventForm");
-const addBtn = document.querySelector(".sidebar a.add");
-const closeBtn = document.querySelector(".close-btn");
-
-addBtn.addEventListener("click", (e) => {
+createForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  modal.style.display = "flex";
-});
 
-closeBtn.addEventListener("click", () => {
-  modal.style.display = "none";
-});
+  const newEvent = {
+    id: Date.now(),
+    host: "User1234",
+    eventName: createForm.querySelector("input[placeholder='event name']").value,
+    eventTime: createForm.querySelector("input[type='datetime-local']").value,
+    location: createForm.querySelector("input[placeholder='location']").value,
+    maxParticipants: createForm.querySelector("input[name='participants']").value,
+    description: createForm.querySelector("textarea").value,
+    tags: [tagInput.value],
+    participants: [],
+    status: "open",
+    timeAgo: "0 นาที" // รอ backend 
+  };
 
-window.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.style.display = "none";
+  try {
+    // 🔄 รอ backend จริง
+    await fetch("http://localhost:3000/events", { // รอ backend 
+      method: "POST", // รอ backend 
+      headers: { "Content-Type": "application/json" }, // รอ backend 
+      body: JSON.stringify(newEvent) // รอ backend 
+    });
+    loadEvents();
+  } catch {
+    // fallback localStorage
+    const events = JSON.parse(localStorage.getItem("events")) || [];
+    events.push(newEvent);
+    localStorage.setItem("events", JSON.stringify(events));
+    renderEvents(events);
   }
-});
 
-createForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  alert("Event Created!");
   modal.style.display = "none";
   createForm.reset();
 });
@@ -194,3 +212,61 @@ window.addEventListener("click", (e) => {
     suggestionBox.style.display = "none";
   }
 });
+
+// ---------------- Event Feed ----------------
+const feed = document.getElementById("event-feed");
+
+async function loadEvents() {
+  try {
+    const res = await fetch("http://localhost:3000/events"); // รอ backend
+    const events = await res.json();
+    renderEvents(events);
+  } catch {
+    const localEvents = JSON.parse(localStorage.getItem("events")) || [];
+    renderEvents(localEvents);
+  }
+}
+
+function renderEvents(events) {
+  feed.innerHTML = "";
+  events.forEach(event => {
+    const card = document.createElement("div");
+    card.className = "event-card";
+
+    card.innerHTML = `
+      <div class="event-header">
+        <span class="host">${event.host}</span>
+        <span class="status ${event.status}">${event.status}</span>
+      </div>
+      <h3>${event.eventName}</h3>
+      <p>${event.description}</p>
+      <small>📍 ${event.location || "ไม่ระบุ"}</small><br>
+      <small>รับ ${event.participants?.length || 0}/${event.maxParticipants || 0} คน</small>
+      <button class="join-btn" ${event.status === "close" ? "disabled" : ""}>
+        ${event.status === "close" ? "CLOSED" : "JOIN"}
+      </button>
+    `;
+
+    card.querySelector(".join-btn").addEventListener("click", () => joinEvent(event, events));
+
+    feed.appendChild(card);
+  });
+}
+
+async function joinEvent(event, events) {
+  try {
+    await fetch(`http://localhost:3000/events/${event.id}/join`, { // รอ backend 
+      method: "PUT", // รอ backend 
+      headers: { "Content-Type": "application/json" }, // รอ backend 
+      body: JSON.stringify({ userId: "currentUser" }) // รอ backend
+    });
+    loadEvents();
+  } catch {
+    event.participants.push("mockUser");
+    localStorage.setItem("events", JSON.stringify(events));
+    renderEvents(events);
+  }
+}
+
+// ---------------- Initial Load ----------------
+loadEvents();

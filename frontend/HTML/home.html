@@ -64,17 +64,17 @@
 
             <h2>Create Event</h2>
             <form id="createEventForm">
-                <input type="text" placeholder="event name" required>
-                <input type="datetime-local" placeholder="date time" required>
-                <input type="text" placeholder="location">
-                <input type="text" placeholder="participants">
+                <input type="text" name="eventName" placeholder="event name" required>
+                <input type="datetime-local" name="eventTime" placeholder="date time" required>
+                <input type="text" name="location" placeholder="location">
+                <input type="number" name="maxParticipants" placeholder="participants">
 
                 <div class="tag-container">
                     <input type="text" id="tagInput" placeholder="tag">
                     <div id="tagSuggestions" class="suggestions"></div>
                 </div>
 
-                <textarea placeholder="detail"></textarea>
+                <textarea name="description" placeholder="detail"></textarea>
 
                 <p class="note">Check the details of your created event!</p>
                 <button type="submit" class="create-btn">Create</button>
@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <main id="content"></main>
+    <main id="event-feed" class="feed"></main>
 
     <script src="/frontend/JS/home.js"></script>
 </body>
