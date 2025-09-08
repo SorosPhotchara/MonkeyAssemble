@@ -55,35 +55,36 @@
         <ul id="menuList">
         </ul>
     </div>
-    
+
     <!-- Popup Create Event -->
     <div id="createEventModal" class="modal">
-    <div class="modal-content">
-        
-        <i class="fa-solid fa-xmark close-btn"></i> 
+        <div class="modal-content">
 
-        <h2>Create Event</h2>
-        <form id="createEventForm">
-        <input type="text" placeholder="event name" required>
-        <input type="datetime-local" placeholder="date time" required>
-        <input type="text" placeholder="location">
-        <input type="text" placeholder="participants">
+            <i class="fa-solid fa-xmark close-btn"></i>
 
-        <div class="tag-container">
-            <input type="text" id="tagInput" placeholder="tag">
-            <div id="tagSuggestions" class="suggestions"></div>
+            <h2>Create Event</h2>
+            <form id="createEventForm">
+                <input type="text" placeholder="event name" required>
+                <input type="datetime-local" placeholder="date time" required>
+                <input type="text" placeholder="location">
+                <input type="text" placeholder="participants">
+
+                <div class="tag-container">
+                    <input type="text" id="tagInput" placeholder="tag">
+                    <div id="tagSuggestions" class="suggestions"></div>
+                </div>
+
+                <textarea placeholder="detail"></textarea>
+
+                <p class="note">Check the details of your created event!</p>
+                <button type="submit" class="create-btn">Create</button>
+            </form>
         </div>
-
-        <textarea placeholder="detail"></textarea>
-
-        <p class="note">Check the details of your created event!</p>
-        <button type="submit" class="create-btn">Create</button>
-        </form>
-    </div>
     </div>
 
-
+    <main id="content"></main>
 
     <script src="/frontend/JS/home.js"></script>
 </body>
+
 </html>
