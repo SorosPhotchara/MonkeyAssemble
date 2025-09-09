@@ -166,3 +166,133 @@ html.dark .toggle .ball {
 input#toggle {
   display: none;
 }
+
+/* =======================
+   Reset Password Card
+======================= */
+.resetpassword-card {
+  background: var(--highlight);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.resetpassword-card h2 {
+  margin-bottom: 30px;
+  font-size: 32px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--head-font);
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 15px;
+  width: 100%;
+  background: var(--highlight);
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 2px solid var(--sub-font);
+  background: transparent;
+  font-size: 16px;
+  color: var(--head-font);
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-bottom-color: var(--border);
+}
+
+.input-group label {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  color: var(--head-font);
+  font-size: 14px;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+@keyframes floatLabel { 
+  0%, 100% { 
+    transform: translateY(0); 
+  } 
+  50% { 
+    transform: translateY(-4px); 
+  } 
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label {
+  top: -8px;
+  left: 0;
+  font-size: 13px;
+  color: var(--border);
+  background: var(--highlight);
+  padding: 0 4px;
+  border-radius: 4px;
+  animation: floatLabel 2s ease-in-out infinite
+}
+
+.input-group i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px;
+  color: #999;
+  transition: 0.3s;
+}
+
+.input-group i:hover {
+  color: var(--border);
+}
+
+.btn-reset {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--head-font);
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 25px;
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-reset:hover {
+  color: var(--white);
+  background: var(--border);
+}
+
+html.dark .btn-reset:hover {
+  color: var(--highlight);
+  background: var(--border);
+}
+
+.back-login-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 16px;
+  color: var(--border);
+  text-decoration: none;
+  font-style: italic;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.back-login-link:hover {
+  text-decoration: underline;
+}

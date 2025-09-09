@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/166/166749.png">
-    <link rel="stylesheet" href="/frontend/CSS/login.css">
+    <link rel="stylesheet" href="/frontend/CSS/reset.css">
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -25,6 +25,27 @@
             <span class="ball"></span>
         </label>
     </header>
+
+    <div class="resetpassword-card">
+        <h2>Reset Password</h2>
+        <form action="">
+            <div class="input-group">
+                <input type="password" id="password" name="password" required>
+                <label for="password">Password</label>
+                <i class="bx bx-hide toggle-password"></i>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="confirmpassword" name="confirmpassword" required>
+                <label for="confirmpassword">Confirm Password</label>
+                <i class="bx bx-hide toggle-password"></i>
+            </div>
+
+            <button type="submit" class="btn-reset">Reset</button>
+
+            <a href="/frontend/HTML/login.html" class="back-login-link"> Back to Login</a>
+        </form>
+    </div>
     
     <script src="/frontend/JS/reset.js"></script>
 </body>
