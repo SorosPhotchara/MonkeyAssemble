@@ -78,7 +78,7 @@ function updateMenu() {
             window.location.href = "/frontend/HTML/login.html";
         });
         addMenuItem("สมัครสมาชิก", () => {
-            window.location.href = "/frontend/HTML/register.html";
+            window.location.href = "/frontend/HTML/signup.html";
         });
     } else {
         addMenuItem("โปรไฟล์ของฉัน", () => {
@@ -123,7 +123,7 @@ function showLoginPage() {
 }
 
 function showSignupPage() {
-    window.location.href = "/frontend/HTML/register.html";
+    window.location.href = "/frontend/HTML/signup.html";
 }
 
 async function logoutUser() {

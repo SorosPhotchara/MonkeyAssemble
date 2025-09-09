@@ -166,20 +166,22 @@ input#toggle {
   display: none;
 }
 
-/* =======================
-   Login Card
+/* ======================= 
+   Signup Card
 ======================= */
-.login-card {
+.signup-card {
   background: var(--highlight); 
   padding: 40px 30px;
+  border: 2px solid var(--border);
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 420px;
+  margin-top: 50px;
+  max-width: 560px;
   transition: 0.3s;
 }
 
-.login-card h2 {
+.signup-card h2 {
   margin-bottom: 30px;
   font-size: 36px;
   font-weight: 700;
@@ -190,10 +192,11 @@ input#toggle {
 
 .input-group {
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   width: 100%;
   background: var(--highlight);
 }
+
 
 .input-group input {
   width: 100%;
@@ -221,28 +224,44 @@ input#toggle {
   transition: 0.3s ease;
 }
 
+.input-group select {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 2px solid var(--sub-font);
+  background: transparent;
+  font-size: 14px;
+  color: var(--head-font);
+  outline: none;
+  transition: 0.3s;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.input-group select:focus {
+  border-bottom-color: var(--border);
+}
+
 .input-group i {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 20px;
-    color: #999;
-    transition: 0.3s;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px;
+  color: #999;
+  transition: 0.3s;
 }
 
 .input-group i:hover {
-    color: var(--border);
+  color: var(--border);
 }
 
 @keyframes floatLabel { 
-  0%, 100% { 
-    transform: translateY(0); 
-  } 
-  50% { 
-    transform: translateY(-4px); 
-  } 
+  0%, 100% { transform: translateY(0); } 
+  50% { transform: translateY(-4px); } 
 }
 
 .input-group input:focus ~ label,
@@ -254,28 +273,49 @@ input#toggle {
   background: var(--highlight); 
   padding: 0 4px;
   border-radius: 4px;
-  animation: floatLabel 2s ease-in-out infinite
+  animation: floatLabel 2s ease-in-out infinite;
 }
 
-.forget-container {
+.input-group select:focus ~ label,
+.input-group select:valid ~ label {
+  top: -8px;
+  left: 0;
+  font-size: 13px;
+  color: var(--border);
+  background: var(--highlight); 
+  padding: 0 4px;
+  border-radius: 4px;
+  animation: floatLabel 2s ease-in-out infinite;
+}
+
+.input-group select option {
+  background: var(--highlight);
+  color: var(--head-font);
+}
+
+.terms {
   display: flex;
-  justify-content: flex-end;
-  margin: 4px 0 12px 0;
+  align-items: center;
+  font-size: 14px;
+  color: var(--sub-font);
+  margin: 8px 0 18px 0;
 }
 
-.forget-link {
-  font-size: 16px;
-  font-style: italic;
+.terms input {
+  margin-right: 8px;
+}
+
+.terms a {
   color: var(--border);
   text-decoration: none;
   transition: 0.2s;
 }
 
-.forget-link:hover {
+.terms a:hover {
   text-decoration: underline;
 }
 
-.login-btn {
+.btn-signup {
   font-size: 16px;
   font-weight: 600;
   color: var(--head-font);
@@ -289,30 +329,17 @@ input#toggle {
   transition: 0.3s;
 }
 
-.login-btn:hover {
+.btn-signup:hover {
   color: var(--white);
   background: var(--border);
 }
 
-html.dark .login-btn:hover {
+html.dark .btn-signup:hover {
   color: var(--highlight);
   background: var(--border);
 }
 
-.login-card a {
-  font-size: 14px;
-  text-decoration: none;
-  color: var(--border);
-  display: inline-block;
-  margin-top: 12px;
-  transition: 0.2s;
-}
-
-.login-card a:hover {
-  text-decoration: underline;
-}
-
-.login-card p {
+.signup-card p {
   font-size: 16px;
   font-style: italic;
   color: var(--sub-font);
@@ -320,7 +347,7 @@ html.dark .login-btn:hover {
   margin-top: 20px;
 }
 
-.login-card p .sign-up {
+.signup-card p a {
   font-size: 17px;
   font-weight: 700;
   text-decoration: none;
@@ -328,6 +355,6 @@ html.dark .login-btn:hover {
   transition: 0.2s;
 }
 
-.login-card p .sign-up:hover {
+.signup-card p a:hover {
   text-decoration: underline;
 }
