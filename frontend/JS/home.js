@@ -266,7 +266,7 @@ function renderEvents(events) {
 
       const statusEl = card.querySelector(".status");
       statusEl.textContent = "CLOSED";
-      statusEl.className = "status close";
+      statusEl.className = "status closed";
     }
 
     joinBtn.addEventListener("click", () => joinEvent(event, events));

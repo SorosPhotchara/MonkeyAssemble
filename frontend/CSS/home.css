@@ -23,6 +23,7 @@
   --moon-color: #feb47b;
   --ball-bg: #feb47b;
   --white: #fff;
+  --card-bg: #fff;
 }
 
 /* =======================
@@ -41,6 +42,7 @@ html.dark {
   --moon-color: #2a2024;
   --ball-bg: #feb47b;
   --white: #fff;
+  --card-bg: #2d2529;
 }
 
 /* =======================
@@ -495,7 +497,8 @@ html.dark .create-btn:hover {
 .event-card {
   width: 90%;
   max-width: 500px;
-  background: var(--white);
+  background: var(--card-bg);
+  color: var(--head-font);
   border-radius: 20px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -588,6 +591,19 @@ html.dark .create-btn:hover {
 
 .join-btn:hover {
   background: #e76f51;
+}
+
+html.dark .event-body p, html.dark .event-body small { 
+  color: var(--sub-font); 
+} 
+
+html.dark .join-btn { 
+  background: var(--bar-font); 
+  color: var(--bg); 
+} 
+html.dark .join-btn:hover { 
+  background: var(--border); 
+  color: var(--highlight); 
 }
 
 .status.open {
