@@ -138,7 +138,7 @@ async function logoutUser() {
     }
 }
 
-// ---------------- Modal Create Event ----------------
+// ---------------- Create Event ----------------
 createForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -148,23 +148,24 @@ createForm.addEventListener("submit", async (e) => {
     eventName: createForm.querySelector("input[placeholder='event name']").value,
     eventTime: createForm.querySelector("input[type='datetime-local']").value,
     location: createForm.querySelector("input[placeholder='location']").value,
-    maxParticipants: createForm.querySelector("input[name='participants']").value,
+    maxParticipants: createForm.querySelector("input[name='maxParticipants']").value,
+    startTime: createForm.querySelector("input[name='startTime']").value,
+    endTime: createForm.querySelector("input[name='endTime']").value,
     description: createForm.querySelector("textarea").value,
     tags: [tagInput.value],
     participants: [],
     status: "open",
-    timeAgo: "0 นาที" // รอ backend 
+    timeAgo: "0 นาที" 
   };
 
   try {
-    await fetch("http://localhost:3000/events", { // รอ backend 
-      method: "POST", // รอ backend 
-      headers: { "Content-Type": "application/json" }, // รอ backend 
-      body: JSON.stringify(newEvent) // รอ backend 
+    await fetch("http://localhost:3000/events", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newEvent)
     });
     loadEvents();
   } catch {
-    // fallback localStorage
     const events = JSON.parse(localStorage.getItem("events")) || [];
     events.push(newEvent);
     localStorage.setItem("events", JSON.stringify(events));
@@ -227,34 +228,68 @@ async function loadEvents() {
 }
 
 function renderEvents(events) {
-
   events.forEach(event => {
     if (document.getElementById(`event-${event.id}`)) return;
 
     const card = document.createElement("div");
     card.className = "event-card";
     card.id = `event-${event.id}`;
+    card.dataset.endTime = event.endTime;  
+
+    function formatDateTime(datetime) {
+      if (!datetime) return "ไม่ระบุ";
+      const d = new Date(datetime);
+      const options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' };
+      return d.toLocaleString('th-TH', options).replace(',', '');
+    }
 
     card.innerHTML = `
       <div class="event-header">
         <span class="host">${event.host}</span>
-        <span class="status ${event.status}">${event.status}</span>
+        <span class="status ${event.status}">${event.status === "close" ? "CLOSED" : event.status.toUpperCase()}</span>
       </div>
       <h3>${event.eventName}</h3>
       <p>${event.description}</p>
-      <small>${event.location || "ไม่ระบุ"}</small><br>
+      <small>สถานที่: ${event.location || "ไม่ระบุ"}</small><br>
+      <small>เวลาเปิดรับ: ${formatDateTime(event.startTime)} - ${formatDateTime(event.endTime)}</small><br>
       <small>รับ ${event.participants?.length || 0}/${event.maxParticipants || 0} คน</small>
       <button class="join-btn" ${event.status === "close" ? "disabled" : ""}>
         ${event.status === "close" ? "CLOSED" : "JOIN"}
       </button>
     `;
 
-    card.querySelector(".join-btn").addEventListener("click", () => joinEvent(event, events));
+    const joinBtn = card.querySelector(".join-btn");
+    const now = new Date();
+    if (event.endTime && new Date(event.endTime) < now) {
+      joinBtn.disabled = true;
+      joinBtn.textContent = "CLOSED";
+
+      const statusEl = card.querySelector(".status");
+      statusEl.textContent = "CLOSED";
+      statusEl.className = "status close";
+    }
+
+    joinBtn.addEventListener("click", () => joinEvent(event, events));
 
     feed.appendChild(card);
   });
 }
 
+setInterval(() => {
+  const now = new Date();
+  document.querySelectorAll(".event-card").forEach(card => {
+    const joinBtn = card.querySelector(".join-btn");
+    const endTime = card.dataset.endTime;
+    if (endTime && new Date(endTime) < now && !joinBtn.disabled) {
+      joinBtn.disabled = true;
+      joinBtn.textContent = "CLOSED";
+
+      const statusEl = card.querySelector(".status");
+      statusEl.textContent = "CLOSED";
+      statusEl.className = "status close";
+    }
+  });
+}, 30000);
 
 async function joinEvent(event, events) {
   try {
@@ -270,6 +305,43 @@ async function joinEvent(event, events) {
     renderEvents(events);
   }
 }
+
+// -------------------- Modal Popup Detail Post --------------------
+
+// ---------------- Update Event Card Time + Status ----------------
+function updateEventCards() {
+    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Bangkok" }));
+
+    document.querySelectorAll(".event-card").forEach(card => {
+        const startTime = new Date(card.dataset.startTime);
+        const endTime = new Date(card.dataset.endTime);
+        const timeElem = card.querySelector(".time");
+        const joinBtn = card.querySelector(".join-btn");
+        const statusElem = card.querySelector(".status");
+
+        const diffMs = now - startTime;
+        const diffMin = Math.floor(diffMs / 60000);
+        const diffHour = Math.floor(diffMin / 60);
+        timeElem.textContent = diffHour > 0 ? `${diffHour} ชั่วโมง` : `${diffMin} นาที`;
+
+        if (now > endTime) {
+            joinBtn.disabled = true;
+            joinBtn.textContent = "CLOSED";
+            statusElem.textContent = "CLOSED";
+            statusElem.classList.remove("open");
+            statusElem.classList.add("closed");
+        } else {
+            joinBtn.disabled = false;
+            joinBtn.textContent = "JOIN";
+            statusElem.textContent = "OPEN";
+            statusElem.classList.remove("closed");
+            statusElem.classList.add("open");
+        }
+    });
+}
+
+setInterval(updateEventCards, 30000);
+updateEventCards();
 
 // ---------------- Initial Load ----------------
 loadEvents();

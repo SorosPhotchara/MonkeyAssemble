@@ -353,6 +353,13 @@ html.dark .sidebar a.add:hover i {
   outline: none;
 }
 
+.modal-content input[type="datetime-local"] {
+    padding: 10px;
+    border-radius: 10px;
+    background: var(--highlight);
+}
+
+
 .modal-content textarea {
   resize: none;
   height: 80px;
@@ -581,4 +588,14 @@ html.dark .create-btn:hover {
 
 .join-btn:hover {
   background: #e76f51;
+}
+
+.status.open {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status.close {
+  background: #fee2e2;
+  color: #991b1b;
 }

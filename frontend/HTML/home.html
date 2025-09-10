@@ -44,8 +44,6 @@
         </div>
     </nav>
 
-    <main id="content"></main>
-
     <!-- Hamburger Menu -->
     <div class="hamburger" id="hamburgerBtn">
         <i class="fa-solid fa-bars"></i>
@@ -65,7 +63,8 @@
             <h2>Create Event</h2>
             <form id="createEventForm">
                 <input type="text" name="eventName" placeholder="event name" required>
-                <input type="datetime-local" name="eventTime" placeholder="date time" required>
+                <input type="datetime-local" name="startTime" placeholder="เวลาเริ่มรับผู้เข้าร่วม" required>
+                <input type="datetime-local" name="endTime" placeholder="เวลาปิดรับผู้เข้าร่วม" required>
                 <input type="text" name="location" placeholder="location">
                 <input type="number" name="maxParticipants" placeholder="participants">
 
@@ -82,30 +81,51 @@
         </div>
     </div>
 
-    <main id="event-feed" class="feed">
+    <section id="event-feed" class="feed">
         <div class="event-card">
             <div class="event-header">
-            <div class="host-info">
-                <span class="avatar" style="background: purple;"></span>
-                <span class="host">User1234</span>
-                <small class="time">1 นาที</small>
+                <div class="host-info">
+                    <span class="avatar" style="background: purple;"></span>
+                    <span class="host">User1234</span>
+                    <small class="time">10 นาที</small>
+                </div>
+                <span class="status open">OPEN</span>
             </div>
-            <span class="status open">OPEN</span>
+            <div class="event-body">
+                <h3>หาเพื่อนเล่นฟุตบอล</h3>
+                <p>ที่สนามใน สจล. เวลา 17:00 น. อยากให้มากันเยอะๆ นะครับ</p>
+                <small>สถานที่: สจล.</small><br>
+                <small>เวลาเปิดรับ: 10/09/25 17:00 - 10/09/25 19:00</small><br>
+                <small>ผู้เข้าร่วม: 2/8</small>
+            </div>
+            <div class="event-footer">
+                <button class="join-btn">JOIN</button>
+            </div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-header">
+                <div class="host-info">
+                    <span class="avatar" style="background: orange;"></span>
+                    <span class="host">User5678</span>
+                    <small class="time">1 ชั่วโมง</small>
+                </div>
+                <span class="status closed">CLOSED</span>
             </div>
             
             <div class="event-body">
-            <h3>หาเพื่อนเล่นฟุตบอล</h3>
-            <p>ที่สนามใน สจล. เวลา 17:00 น.  
-                อยากให้มากันเยอะๆ นะครับ</p>
-            <small>สถานที่: สจล.</small><br>
-            <small>ผู้เข้าร่วม: 2/8</small>
+                <h3>เล่นบาสเกตบอล</h3>
+                <p>สนามกีฬาในมหาวิทยาลัย อยากชวนทุกคนมาสนุกด้วยกัน</p>
+                <small>สถานที่: ม.สจล ฝั่งวิศวะ</small><br>
+                <small>เวลาเปิดรับ: 10/09/25 15:00 - 10/09/25 17:00</small><br>
+                <small>ผู้เข้าร่วม: 8/8</small>
             </div>
             
             <div class="event-footer">
-            <button class="join-btn">JOIN</button>
+                <button class="join-btn" disabled>CLOSED</button>
             </div>
         </div>
-    </main>
+    </section>
 
     <script src="/frontend/JS/home.js"></script>
 </body>
