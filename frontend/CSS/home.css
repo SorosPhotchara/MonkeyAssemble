@@ -552,7 +552,7 @@ html.dark .create-btn:hover {
   color: #065f46;
 }
 
-.status.closed {
+.status.close {
   background: #fee2e2;
   color: #991b1b;
 }
@@ -604,14 +604,4 @@ html.dark .join-btn {
 html.dark .join-btn:hover { 
   background: var(--border); 
   color: var(--highlight); 
-}
-
-.status.open {
-  background: #d1fae5;
-  color: #065f46;
-}
-
-.status.close {
-  background: #fee2e2;
-  color: #991b1b;
 }

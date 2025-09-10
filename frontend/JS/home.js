@@ -309,39 +309,39 @@ async function joinEvent(event, events) {
 // -------------------- Modal Popup Detail Post --------------------
 
 // ---------------- Update Event Card Time + Status ----------------
-function updateEventCards() {
-    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Bangkok" }));
+// function updateEventCards() {
+//     const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Bangkok" }));
 
-    document.querySelectorAll(".event-card").forEach(card => {
-        const startTime = new Date(card.dataset.startTime);
-        const endTime = new Date(card.dataset.endTime);
-        const timeElem = card.querySelector(".time");
-        const joinBtn = card.querySelector(".join-btn");
-        const statusElem = card.querySelector(".status");
+//     document.querySelectorAll(".event-card").forEach(card => {
+//         const startTime = new Date(card.dataset.startTime);
+//         const endTime = new Date(card.dataset.endTime);
+//         const timeElem = card.querySelector(".time");
+//         const joinBtn = card.querySelector(".join-btn");
+//         const statusElem = card.querySelector(".status");
 
-        const diffMs = now - startTime;
-        const diffMin = Math.floor(diffMs / 60000);
-        const diffHour = Math.floor(diffMin / 60);
-        timeElem.textContent = diffHour > 0 ? `${diffHour} ชั่วโมง` : `${diffMin} นาที`;
+//         const diffMs = now - startTime;
+//         const diffMin = Math.floor(diffMs / 60000);
+//         const diffHour = Math.floor(diffMin / 60);
+//         timeElem.textContent = diffHour > 0 ? `${diffHour} ชั่วโมง` : `${diffMin} นาที`;
 
-        if (now > endTime) {
-            joinBtn.disabled = true;
-            joinBtn.textContent = "CLOSED";
-            statusElem.textContent = "CLOSED";
-            statusElem.classList.remove("open");
-            statusElem.classList.add("closed");
-        } else {
-            joinBtn.disabled = false;
-            joinBtn.textContent = "JOIN";
-            statusElem.textContent = "OPEN";
-            statusElem.classList.remove("closed");
-            statusElem.classList.add("open");
-        }
-    });
-}
+//         if (now > endTime) {
+//             joinBtn.disabled = true;
+//             joinBtn.textContent = "CLOSED";
+//             statusElem.textContent = "CLOSED";
+//             statusElem.classList.remove("open");
+//             statusElem.classList.add("closed");
+//         } else {
+//             joinBtn.disabled = false;
+//             joinBtn.textContent = "JOIN";
+//             statusElem.textContent = "OPEN";
+//             statusElem.classList.remove("closed");
+//             statusElem.classList.add("open");
+//         }
+//     });
+// }
 
-setInterval(updateEventCards, 30000);
-updateEventCards();
+// setInterval(updateEventCards, 30000);
+// updateEventCards();
 
 // ---------------- Initial Load ----------------
 loadEvents();
