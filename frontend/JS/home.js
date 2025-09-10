@@ -179,7 +179,7 @@ createForm.addEventListener("submit", async (e) => {
 const tagInput = document.getElementById("tagInput");
 const suggestionBox = document.getElementById("tagSuggestions");
 
-const tags = ["football", "basketball", "volleyball", "baseball", "handball", "softball"];
+const tags = ["football", "basketball", "volleyball", "baseball", "handball", "softball"]; // mokup
 
 tagInput.addEventListener("input", () => {
   const input = tagInput.value.toLowerCase();
@@ -227,10 +227,13 @@ async function loadEvents() {
 }
 
 function renderEvents(events) {
-  feed.innerHTML = "";
+
   events.forEach(event => {
+    if (document.getElementById(`event-${event.id}`)) return;
+
     const card = document.createElement("div");
     card.className = "event-card";
+    card.id = `event-${event.id}`;
 
     card.innerHTML = `
       <div class="event-header">
@@ -251,6 +254,7 @@ function renderEvents(events) {
     feed.appendChild(card);
   });
 }
+
 
 async function joinEvent(event, events) {
   try {

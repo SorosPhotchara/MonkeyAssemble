@@ -50,9 +50,6 @@ body {
   font-family: 'Nunito', 'Prompt', sans-serif;
   background: var(--bg);
   color: var(--head-font);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   transition: 0.3s;
 }
@@ -480,84 +477,108 @@ html.dark .create-btn:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 90px; /* เผื่อ navbar */
-  gap: 20px; /* เว้นระหว่างการ์ด */
+  margin-top: 90px;
+  gap: 20px;
+  padding-bottom: 20px;
 }
 
 /* =======================
    Event Card
 ======================= */
 .event-card {
-  background: var(--highlight);
-  border: 1px solid var(--border);
+  width: 90%;
+  max-width: 500px;
+  background: var(--white);
   border-radius: 20px;
   padding: 20px;
-  max-width: 600px;
-  width: 90%;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.2s, background 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: 0.2s;
 }
 
 .event-card:hover {
   transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
 .event-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
-.event-header .host {
-  font-weight: bold;
+.host-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.host {
+  font-weight: 600;
   color: var(--head-font);
 }
 
-.event-header .status {
-  padding: 2px 8px;
-  border-radius: 10px;
+.time {
   font-size: 12px;
-  text-transform: uppercase;
+  color: var(--sub-font);
+}
+
+.status {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 12px;
 }
 
 .status.open {
-  background: #4caf50;
-  color: var(--white);
+  background: #d1fae5;
+  color: #065f46;
 }
 
-.status.close {
-  background: #f44336;
-  color: var(--white);;
+.status.closed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.event-body h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.event-body p {
+  font-size: 14px;
+  color: var(--sub-font);
+  margin-bottom: 8px;
+}
+
+.event-body small {
+  font-size: 13px;
+  color: var(--sub-font);
+}
+
+.event-footer {
+  margin-top: 15px;
+  text-align: right;
 }
 
 .join-btn {
-  padding: 6px 14px;
+  padding: 8px 16px;
   border: none;
   border-radius: 12px;
   background: var(--border);
-  color: var(--font-white);
-  font-size: 14px;
+  color: white;
+  font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
 }
 
 .join-btn:hover {
-  background: var(--btn-hover);
-}
-
-.join-btn:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-html.dark .event-card {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  color: var(--head-font);
-}
-
-html.dark .applicants {
-  color: var(--sub-font);
+  background: #e76f51;
 }
