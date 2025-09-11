@@ -1,9 +1,8 @@
 <h1 align="center">Hi 👋, We're CEDT group 2</h1>
 <h3 align="center">Mini Project WEB APPLICATION DEVELOPMENT</h3>
 
-<h3 align="center">✨ Project Preview ✨</h3>
 <p align="center">
-  <iframe src="https://giphy.com/embed/KpACNEh8jXK2Q" width="480" height="269" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/computer-monkey-KpACNEh8jXK2Q">via GIPHY</a></p>
+  <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Project Demo" width="600"/>
 </p>
 
 <h3 align="left">Connect with us:</h3>
