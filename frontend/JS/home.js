@@ -308,6 +308,7 @@ async function joinEvent(event, events) {
 
 // -------------------- Modal Popup Detail Post --------------------
 
+
 // ---------------- Update Event Card Time + Status ----------------
 // function updateEventCards() {
 //   const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Bangkok" }));

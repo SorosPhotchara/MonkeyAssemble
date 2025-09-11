@@ -387,8 +387,8 @@ html.dark .sidebar a.add:hover i {
 }
 
 .create-btn:hover {
-  color: var(--border);
-  background: var(--moon-color);
+  color: var(--bg);
+  background: var(--bar-font);
 }
 
 .close-btn {
@@ -477,7 +477,8 @@ html.dark .create-btn {
 }
 
 html.dark .create-btn:hover {
-  background: var(--btn-hover);
+  color: var(--head-font);
+  background: var(--highlight);
 }
 
 /* =======================
