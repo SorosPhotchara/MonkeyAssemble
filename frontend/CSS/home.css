@@ -196,7 +196,7 @@ input#toggle {
   border-radius: 20px;
   background: transparent;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
@@ -607,4 +607,62 @@ html.dark .join-btn {
 html.dark .join-btn:hover {
   background: var(--border);
   color: var(--highlight);
+}
+
+/* =======================
+   Event Popup
+======================= */
+.event-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+}
+.event-popup.hidden { display: none; }
+
+.event-popup-content {
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.popup-close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+}
+
+.event-popup .participants-box,
+.event-popup .comment-box {
+  background: #f9f9f9;
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 10px;
+}
+
+.popup-join-btn {
+  background: #ff7e5f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.popup-join-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }
