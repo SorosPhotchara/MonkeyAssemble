@@ -29,9 +29,6 @@ menuItems.forEach(item => {
   });
 });
 
-
-
-
 // ---------------- Modal Create Event ----------------
 const modal = document.getElementById("createEventModal");
 const createForm = document.getElementById("createEventForm");
@@ -221,8 +218,18 @@ function renderEvents(events) {
     `;
 
     const joinBtn = card.querySelector(".join-btn");
-    joinBtn.addEventListener("click", (e) => { e.stopPropagation(); joinEvent(event, events); });
-    card.addEventListener("click", () => openPopup(event));
+    joinBtn.addEventListener("click", (e) => { 
+      e.stopPropagation(); 
+      joinEvent(event, events); 
+    });
+
+    card.addEventListener("click", () => {
+      if (currentUserId === event.host) {
+        window.location.href = `/frontend/HTML/detailhost.html?id=${event.id}`;
+      } else {
+        openPopup(event);
+      }
+    });
 
     feed.appendChild(card);
   });
