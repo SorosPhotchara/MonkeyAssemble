@@ -697,6 +697,7 @@ html.dark .join-btn:hover {
     transform: none;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
     padding: 10px 0;
     border-radius: 20px 20px 0 0;
     border: 1px solid var(--highlight);
@@ -722,14 +723,17 @@ html.dark .join-btn:hover {
 
   .logo {
     font-size: 20px;
-    padding: 8px;;
+    align-items: center;   /* ให้ vertical ตรงกลาง */
+    justify-content: flex-start; /* ชิดซ้าย */
+    padding-left: 15px; /* ระยะจากซ้ายเท่ากันทุกหน้า */
+    margin: 0;
   }
 
   .logo img {
     width: 75px;
     height: auto;
   }
-  
+
   .toggle {
     margin-top: 10px;
     width: 60px;

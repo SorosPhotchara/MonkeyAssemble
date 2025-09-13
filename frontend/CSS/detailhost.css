@@ -71,7 +71,7 @@ body {
     background: var(--bg);
     transition: 0.3s;
     z-index: 1000;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 0.5rem 1rem;
 }
 
 .logo img {
@@ -628,4 +628,78 @@ html.dark .participants-pending .participant-row {
 .end:hover {
   background: linear-gradient(135deg, #2E2E2E, #1C1C1C);
   transform: scale(1.03);
+}
+
+
+/* =======================
+   Responsive Sidebar
+   ======================= */
+@media (max-width: 768px) {
+
+  .hamburger,
+  .hamburger-menu {
+    display: none !important;
+  }
+
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    transform: none;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-radius: 20px 20px 0 0;
+    border: 1px solid var(--highlight);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    background: var(--bg);
+    z-index: 1000;
+  }
+
+  .sidebar a {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+  }
+
+  .sidebar a.add {
+    width: 60px;
+    height: 60px;
+    margin-top: -25px;
+    border-radius: 50%;
+    background: var(--highlight);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .logo img {
+    width: 75px;
+    height: auto;
+  }
+  
+  .toggle {
+    margin-top: 10px;
+    width: 60px;
+    height: 30px;
+  }
+
+  .toggle i {
+    font-size: 16px;
+    line-height: 30px;
+  }
+
+  .toggle .ball {
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+  }
+
+  html.dark .toggle .ball {
+    transform: translateX(30px);
+  }
 }
