@@ -128,3 +128,143 @@ async function logoutUser() {
         alert("เกิดข้อผิดพลาด: " + err.message);
     }
 }
+
+// Mockup tag data (English, sports + esports, many tags)
+const tags = [
+  { name: "Football" },
+  { name: "Basketball" },
+  { name: "Volleyball" },
+  { name: "Badminton" },
+  { name: "Running" },
+  { name: "Fitness" },
+  { name: "Yoga" },
+  { name: "Cycling" },
+  { name: "Table Tennis" },
+  { name: "Tennis" },
+  { name: "Swimming" },
+  { name: "Golf" },
+  { name: "Baseball" },
+  { name: "Softball" },
+  { name: "Rugby" },
+  { name: "American Football" },
+  { name: "Cricket" },
+  { name: "Hockey" },
+  { name: "Ice Hockey" },
+  { name: "Skateboarding" },
+  { name: "Surfing" },
+  { name: "Climbing" },
+  { name: "Boxing" },
+  { name: "Muay Thai" },
+  { name: "Martial Arts" },
+  { name: "Judo" },
+  { name: "Taekwondo" },
+  { name: "Karate" },
+  { name: "Wrestling" },
+  { name: "Snooker" },
+  { name: "Bowling" },
+  { name: "Darts" },
+  { name: "Archery" },
+  { name: "Shooting" },
+  { name: "Fencing" },
+  { name: "Rowing" },
+  { name: "Sailing" },
+  { name: "Triathlon" },
+  { name: "Duathlon" },
+  { name: "CrossFit" },
+  { name: "Aerobic" },
+  { name: "Dance" },
+  { name: "Cheerleading" },
+  { name: "Petanque" },
+  { name: "Sepak Takraw" },
+  { name: "Ultimate Frisbee" },
+  { name: "Esports" },
+  { name: "League of Legends" },
+  { name: "Valorant" },
+  { name: "Dota 2" },
+  { name: "Counter-Strike" },
+  { name: "Overwatch" },
+  { name: "PUBG" },
+  { name: "Apex Legends" },
+  { name: "Rainbow Six Siege" },
+  { name: "Rocket League" },
+  { name: "FIFA" },
+  { name: "eFootball" },
+  { name: "Mobile Legends" },
+  { name: "Arena of Valor" },
+  { name: "Free Fire" },
+  { name: "Call of Duty" },
+  { name: "Fortnite" },
+  { name: "Hearthstone" },
+  { name: "StarCraft II" },
+  { name: "Tekken" },
+  { name: "Street Fighter" },
+  { name: "Super Smash Bros" },
+  { name: "Pokemon Unite" },
+  { name: "Clash Royale" },
+  { name: "Clash of Clans" },
+  { name: "Brawl Stars" },
+  { name: "Teamfight Tactics" },
+  { name: "Auto Chess" },
+  { name: "Chess" },
+  { name: "Go" },
+  { name: "Board Games" },
+  { name: "Card Games" },
+  { name: "Speed Skating" },
+  { name: "Figure Skating" },
+  { name: "Skiing" },
+  { name: "Snowboarding" },
+  { name: "Motorsport" },
+  { name: "Formula 1" },
+  { name: "MotoGP" },
+  { name: "Drifting" },
+  { name: "Kart Racing" },
+  { name: "Horse Riding" },
+  { name: "Fishing" },
+  { name: "Hiking" },
+  { name: "Camping" },
+  { name: "Parkour" },
+  { name: "Handball" },
+  { name: "Netball" },
+  { name: "Lacrosse" },
+  { name: "Polo" },
+  { name: "Squash" },
+  { name: "Paddle Tennis" },
+  { name: "Pickleball" },
+  { name: "Soft Tennis" },
+  { name: "Racquetball" }
+];
+
+const tagList = document.querySelector('.tag-list');
+const tagSearchInput = document.getElementById('tagSearchInput');
+
+function renderTags(search = "") {
+  tagList.innerHTML = "";
+  const searchLower = search.toLowerCase();
+  const filtered = tags
+    .map(tag => ({
+      ...tag,
+      match: tag.name.toLowerCase().includes(searchLower)
+    }))
+    .sort((a, b) => {
+      if (a.match === b.match) return a.name.localeCompare(b.name, 'en');
+      return a.match ? -1 : 1;
+    })
+    .filter(tag => tag.name.toLowerCase().includes(searchLower) || search === "");
+
+  filtered.forEach(tag => {
+    const card = document.createElement('div');
+    card.className = 'tag-card';
+    card.textContent = tag.name;
+    tagList.appendChild(card);
+  });
+}
+
+// initial render
+renderTags();
+
+// event: ค้นหาและ sort
+if (tagSearchInput) {
+  tagSearchInput.addEventListener('input', (e) => {
+    renderTags(e.target.value.trim());
+  });
+}
