@@ -9,7 +9,7 @@
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body data-user-id="123" data-role="visitor">
     <!-- Header -->
     <header class="navbar">
         <div class="logo">
@@ -36,6 +36,52 @@
             <a href="/frontend/HTML/profile.html" class="active"><i class="fa-solid fa-user"></i></a>
         </div>
     </nav>
+
+    <!-- Profile Card -->
+    <main class="profile-container">
+        <div class="profile-card">
+            <img src="/uploads/default-avatar.png" id="profile-pic" class="profile-pic">
+            <h2 id="profile-username">Username</h2>
+            <p id="profile-bio">คำอธิบายตัวเอง</p>
+            <div class="follow-info">
+                <span><strong id="followers-count">0</strong> Followers</span>
+                <span><strong id="following-count">0</strong> Following</span>
+            </div>
+            <button id="edit-btn" class="edit-btn">Edit Profile</button>
+            <button id="follow-btn" class="follow-btn hidden">Follow</button>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-tab="your-posts">Your Post</button>
+                <button class="tab" data-tab="history">Participation History</button>
+            </div>
+
+            <!-- Post Containers -->
+            <div id="your-posts" class="tab-content active"></div>
+            <div id="history" class="tab-content"></div>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal">
+        <div class="modal-content">
+            <h3>แก้ไขโปรไฟล์</h3>
+
+            <label for="username">ชื่อผู้ใช้</label>
+            <input type="text" id="username">
+
+            <label for="bio">คำอธิบายตัวเอง</label>
+            <textarea id="bio" rows="3"></textarea>
+
+            <label for="file-upload" class="file-label">เลือกอรูปภาพ</label>
+            <input type="file" id="file-upload">
+
+            <div class="btn-group">
+                <button class="btn-cancel">ยกเลิก</button>
+                <button class="btn-save">บันทึก</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Hamburger Menu -->
     <div class="hamburger" id="hamburgerBtn">
