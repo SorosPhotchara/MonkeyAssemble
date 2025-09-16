@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\photc\\Desktop\\term 2-1\\Web app\\MonkeyAssembly\\MonkeyAssembly.csproj": {}
+    "C:\\Users\\photc\\Documents\\GitHub\\WhereWeGo\\MonkeyAssembly\\MonkeyAssembly.csproj": {}
   },
   "projects": {
-    "C:\\Users\\photc\\Desktop\\term 2-1\\Web app\\MonkeyAssembly\\MonkeyAssembly.csproj": {
+    "C:\\Users\\photc\\Documents\\GitHub\\WhereWeGo\\MonkeyAssembly\\MonkeyAssembly.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\photc\\Desktop\\term 2-1\\Web app\\MonkeyAssembly\\MonkeyAssembly.csproj",
+        "projectUniqueName": "C:\\Users\\photc\\Documents\\GitHub\\WhereWeGo\\MonkeyAssembly\\MonkeyAssembly.csproj",
         "projectName": "MonkeyAssembly",
-        "projectPath": "C:\\Users\\photc\\Desktop\\term 2-1\\Web app\\MonkeyAssembly\\MonkeyAssembly.csproj",
+        "projectPath": "C:\\Users\\photc\\Documents\\GitHub\\WhereWeGo\\MonkeyAssembly\\MonkeyAssembly.csproj",
         "packagesPath": "C:\\Users\\photc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\photc\\Desktop\\term 2-1\\Web app\\MonkeyAssembly\\obj\\",
+        "outputPath": "C:\\Users\\photc\\Documents\\GitHub\\WhereWeGo\\MonkeyAssembly\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
