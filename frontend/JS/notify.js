@@ -128,3 +128,35 @@ async function logoutUser() {
         alert("เกิดข้อผิดพลาด: " + err.message);
     }
 }
+
+// ตัวอย่างข้อมูลแจ้งเตือน
+const notifications = [
+  { user: "User1234", msg: "มาเตะบอลกันเถอะ", color: "#7B2FF2" },
+  { user: "User1246", msg: "ผมอยากไปด้วยคนได้ไหม", color: "#7B2FF2" },
+  { user: "User999", msg: "จองด้วยๆsๆ", color: "#1DE9B6" },
+  { user: "UserGEXP", msg: "ผมไปด้วยคน", color: "#FFD600" },
+  { user: "Userlikeu", msg: "ขอไปด้วย", color: "#F500A3" },
+    { user: "User1234", msg: "มาเตะบอลกันเถอะ", color: "#7B2FF2" },
+  { user: "User1246", msg: "ผมอยากไปด้วยคนได้ไหม", color: "#7B2FF2" },
+  { user: "User999", msg: "จองด้วยๆsๆ", color: "#1DE9B6" },
+  { user: "UserGEXP", msg: "ผมไปด้วยคน", color: "#FFD600" },
+  { user: "Userlikeu", msg: "ขอไปด้วย", color: "#F500A3" }
+];
+
+// เลือก container
+const notifyList = document.querySelector('.notify-list');
+notifyList.innerHTML = ""; // ล้างข้อมูลเดิม
+
+// สร้าง HTML สำหรับแต่ละรายการ
+notifications.forEach((item) => {
+  const notifyItem = document.createElement('div');
+  notifyItem.className = 'notify-item';
+  notifyItem.innerHTML = `
+    <span class="notify-avatar" style="background:${item.color}"></span>
+    <div class="notify-content">
+      <span class="notify-user">${item.user}</span>
+      <span class="notify-msg">${item.msg}</span>
+    </div>
+  `;
+  notifyList.appendChild(notifyItem);
+});

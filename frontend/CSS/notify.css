@@ -55,6 +55,7 @@ body {
   align-items: center;
   min-height: 100vh;
   transition: 0.3s;
+  padding-top: 80px; /* เพิ่มบรรทัดนี้ */
 }
 
 /* =======================
@@ -310,4 +311,114 @@ html.dark .sidebar a.add:hover i {
 
 .hamburger-menu li:hover {
   background: var(--highlight);
+}
+
+/* =======================
+   Notifications
+======================= */
+/* Notification Title */
+.notify-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--bar-font);
+  letter-spacing: 1px;
+  z-index: 2;
+}
+
+/* Notification List Container */
+.notify-list {
+  width: 900px; /* เดิม 600px */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.notify-list {
+  background: #FFEDEA;
+}
+
+html.dark .notify-list {
+  background: #2a2024;
+}
+
+/* Notification Item */
+.notify-item {
+  display: flex;
+  align-items: center;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-bottom: none;
+  border-radius: 0;
+  padding: 24px 28px;
+  transition: background 0.2s;
+}
+
+.notify-item:last-child {
+  border-bottom: 1.5px solid var(--border);
+  border-radius: 0 0 12px 12px;
+}
+
+.notify-item:first-child {
+  border-radius: 12px 12px 0 0;
+}
+
+html.dark .notify-item {
+  background: #3a2d34;
+  border-color: #7e6c7a;
+}
+
+/* Avatar */
+.notify-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 22px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Content */
+.notify-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ฟ้อนต์แจ้งเตือน (Light Mode) */
+.notify-user {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #2d1a1a; /* สีเข้มขึ้น */
+}
+
+.notify-msg {
+  font-size: 1rem;
+  color: #4a2e2e; /* สีเข้มขึ้น */
+  margin-top: 2px;
+}
+
+/* ฟ้อนต์แจ้งเตือน (Dark Mode) */
+html.dark .notify-user {
+  color: #ffe0d6;
+}
+
+html.dark .notify-msg {
+  color: #d7c6bc;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .notify-list {
+    width: 98vw;
+    min-width: 0;
+  }
+  .notify-item {
+    padding: 18px 10px;
+  }
 }
