@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "prhBwGYt7B4=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\photc\\Desktop\\term 2-1\\Web app\\MonkeyAssembly\\MonkeyAssembly.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\photc\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.22.1\\microsoft.visualstudio.azure.containers.tools.targets.1.22.1.nupkg.sha512"
+  ],
+  "logs": []
+}
