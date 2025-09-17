@@ -21,8 +21,8 @@
         </div>
 
         <div class="menu">
-            <h2 class="active">FOR YOU</h2>
-            <h2>FOLLOW</h2>
+            <h2 class="active" data-tab="for-you">FOR YOU</h2>
+            <h2 data-tab="follow">FOLLOW</h2>
         </div>
 
         <input type="checkbox" id="toggle">
@@ -57,9 +57,7 @@
     <!-- Popup Create Event -->
     <div id="createEventModal" class="modal">
         <div class="modal-content">
-
             <i class="fa-solid fa-xmark close-btn"></i>
-
             <h2>Create Event</h2>
             <form id="createEventForm">
                 <input type="text" name="eventName" placeholder="event name" required>
@@ -67,19 +65,20 @@
                 <input type="datetime-local" name="endTime" placeholder="เวลาปิดรับผู้เข้าร่วม" required>
                 <input type="text" name="location" placeholder="location">
                 <input type="number" name="maxParticipants" placeholder="participants">
-
                 <div class="tag-container">
                     <input type="text" id="tagInput" placeholder="tag">
                     <div id="tagSuggestions" class="suggestions"></div>
                 </div>
-
                 <textarea name="description" placeholder="detail"></textarea>
-
                 <p class="note">Check the details of your created event!</p>
                 <button type="submit" class="create-btn">Create</button>
             </form>
         </div>
     </div>
+
+    <!-- Tabs content -->
+    <section id="for-you" class="feed tab-content active"></section>
+    <section id="follow" class="feed tab-content"></section>
 
     <section id="event-feed" class="feed">
         <div class="event-card">
@@ -129,25 +128,21 @@
 
     <!-- Event Popup  -->
     <div id="event-popup" class="event-popup hidden">
-    <div class="event-popup-content">
-        <button id="close-popup" class="popup-close-btn"><i class="fa-solid fa-arrow-left"></i></button>
-
-        <h3 id="event-title">Event Name</h3>
-        <p>Host: <span id="event-host">HostName</span></p>
-        <p>สถานที่: <span id="event-place">ไม่ระบุ</span></p>
-
-        <h4>ผู้เข้าร่วม:</h4>
-        <ul id="participants-list"></ul>
-
-        <button id="popup-join-btn" class="popup-join-btn">JOIN</button>
-
-        <h4>Comment:</h4>
-        <div class="comment-section">
-        <input type="text" id="popup-comment-input" placeholder="เขียนความคิดเห็น...">
-        <button id="popup-comment-send"><i class="fa-solid fa-paper-plane"></i></button>
-        <div id="popup-comment-list"></div>
+        <div class="event-popup-content">
+            <button id="close-popup" class="popup-close-btn"><i class="fa-solid fa-arrow-left"></i></button>
+            <h3 id="event-title">Event Name</h3>
+            <p>Host: <span id="event-host">HostName</span></p>
+            <p>สถานที่: <span id="event-place">ไม่ระบุ</span></p>
+            <h4>ผู้เข้าร่วม:</h4>
+            <ul id="participants-list"></ul>
+            <button id="popup-join-btn" class="popup-join-btn">JOIN</button>
+            <h4>Comment:</h4>
+            <div class="comment-section">
+                <input type="text" id="popup-comment-input" placeholder="เขียนความคิดเห็น...">
+                <button id="popup-comment-send"><i class="fa-solid fa-paper-plane"></i></button>
+                <div id="popup-comment-list"></div>
+            </div>
         </div>
-    </div>
     </div>
 
 
